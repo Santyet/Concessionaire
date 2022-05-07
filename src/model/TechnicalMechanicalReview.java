@@ -9,6 +9,15 @@ public class TechnicalMechanicalReview extends Document{
         this.gasLevels = gasLevels;
     }
     
+    public String toString(){
+
+        String out;
+    
+        out = "Price of the technical mehcanical review is: " + super.getPrice() + "\nyear of the technical mechanical review: " + super.getYear() +
+        "\nDecode of the image: ";
+        
+        return out;
+    }
     
 
     /**

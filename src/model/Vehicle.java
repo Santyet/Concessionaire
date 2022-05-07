@@ -38,11 +38,11 @@ public abstract class Vehicle {
         out = "Vehicle brand: " + brand + "\nVehicle model: " + model + "\nVehicle cylinder capacity: " +
         cylinderCapacity + "Used: " + used + "\nVehicle mileage" + mileage + "\nVehicle registration: " + vehicleRegistration
         + "\nVehicle base Price: " + basePrice;
-        return "";
+        return out;
 
     }
 
-    public String decodeL(){
+    /*public String decodeL(){
     
         //////RECORRIDO EN L 
         ////// Las columnas se quedan "fijas" y las filas son las que cambian 
@@ -56,7 +56,7 @@ public abstract class Vehicle {
             dato += " "+matriz[5-1][i];           
             } 
     }
-    
+    */
 
     /**
      * @return double return the basePrice

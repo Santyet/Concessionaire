@@ -14,16 +14,25 @@ public class Document{
 
    }
        
-    public int[][] fillMatrix(int fila, int columna){
-        int[][] code = new int[fila][columna];
+    public int[][] fillMatrix(int row, int column){
+        int[][] code = new int[row][column];
 
-    for (int i=0; i<fila  ; i ++) {
-        for (int j=0; j<columna  ; j++) {
+    for (int i=0; i<row  ; i ++) {
+        for (int j=0; j<column  ; j++) {
             int random = (int)(Math.random()*(10));
             code[i][j]=random;
           }
       }
       return code;
+   }
+
+   public String toString(){
+
+    String out;
+
+    out = "Price of the property card is: " + price + "\nyear of the property card: " + year + "\nDecode of the image: ";
+    
+    return out;
    }
 
    /* String[][] matriz = rellenandoLaMatriz(4,4);

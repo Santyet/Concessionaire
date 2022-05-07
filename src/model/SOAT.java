@@ -9,6 +9,14 @@ public class SOAT extends Document{
         this.coverageCost = coverageCost;
     }
     
+    public String toString(){
+
+        String out;
+    
+        out = "Price of the SOAT is: " + super.getPrice() + "\nyear of the SOAT: " + super.getYear() + "\nDecode of the image: ";
+        
+        return out;
+    }
 
     /**
      * @return double return the coverageCost

@@ -5,6 +5,7 @@ public class ElectricCar extends Car implements ICalculateBatteryUsage{
 
     private double batteryDuration;
     private ChargerType chargerType;
+    private double batteryUsage;
 
     public ElectricCar(double basePrice, double sellPrice, String brand, int model, int cylinderCapacity,
             double mileage, boolean used, String vehicleRegistration, SOAT soat, TechnicalMechanicalReview technicalMechanicalReview,
@@ -13,6 +14,7 @@ public class ElectricCar extends Car implements ICalculateBatteryUsage{
                 technicalMechanicalReview, propertyCard, doorNum, polarized, carType);
                 this.batteryDuration = batteryDuration;
                 this.chargerType = chargerType;
+                this.batteryUsage = batteryUsage;
     }
 
     @Override
@@ -76,6 +78,21 @@ public class ElectricCar extends Car implements ICalculateBatteryUsage{
      */
     public void setChargerType(ChargerType chargerType) {
         this.chargerType = chargerType;
+    }
+
+
+    /**
+     * @return double return the batteryUsage
+     */
+    public double getBatteryUsage() {
+        return batteryUsage;
+    }
+
+    /**
+     * @param batteryUsage the batteryUsage to set
+     */
+    public void setBatteryUsage(double batteryUsage) {
+        this.batteryUsage = batteryUsage;
     }
 
 }

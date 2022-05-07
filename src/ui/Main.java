@@ -3,11 +3,6 @@ import java.util.Scanner; //for input reading
 import model.AutomotiveMultinational;
 import model.CarType;
 import model.ChargerType;
-
-/* 
-To compile: javac -cp src src/ui/Template.java -d bin
-To execute: java -cp bin ui.Template
-*/
 import model.GasType;
 import model.MotorcycleType;
 
@@ -46,7 +41,7 @@ public class Main{
 		    	addVehicle();
 			break;
 		case 2:
-           
+				calculateSellingPrice();
 			break;
 	
 		case 3:
@@ -96,8 +91,7 @@ public class Main{
 		MotorcycleType motorcycleType=null;
 
 		System.out.println("Please type the base price of the vehicle: ");
-		basePrice = sc.nextDouble();
-		sc.nextLine();
+		basePrice = Double.parseDouble(sc.nextLine());
 
 		System.out.println("Please type the brand of the vehicle:");
 		brand = sc.nextLine();
@@ -232,15 +226,17 @@ public class Main{
 			}
 		}
 
-		System.out.println("Please select the vehicle type that you want to add: \n"
-		+"(1) For motorcycle.\n"
-		+"(2) For hybrid car.\n"
-		+"(3) For gasoline car.");
-		if(!isGas){
-			System.out.println("(4) For electric car."); 
+		if(isGas){
+			System.out.println("Please select the vehicle type that you want to add: \n"
+			+"(1) For motorcycle.\n"
+			+"(2) For hybrid car.\n"
+			+"(3) For gasoline car.");
+			option = sc.nextInt();
+		}else{
+			option = 4;
 		}
 		
-		option = sc.nextInt();
+		
 
 		switch(option){
 
@@ -275,8 +271,9 @@ public class Main{
 					break;
 				}
 				
-				auto.addVehicle(basePrice, brand, model, cylinderCapacity, hasSoat, mileage, used, vehicleRegistration, fuelCapacity, motorcycleType,
-				soatPrice, soatYear, coverageCost, tmrPrice, tmrYear, tmrGasLevels, pcPrice, pcYear, gasType);
+				System.out.println(auto.addVehicle(basePrice, brand, model, cylinderCapacity, hasSoat, mileage, used, vehicleRegistration, fuelCapacity, motorcycleType,
+				soatPrice, soatYear, coverageCost, tmrPrice, tmrYear, tmrGasLevels, pcPrice, pcYear, gasType));
+				
 			break;
 
 			case 2:
@@ -335,9 +332,10 @@ public class Main{
 					polarized = false;
 				}				
 
-				auto.addVehicle(basePrice, brand, model, cylinderCapacity, mileage, used, vehicleRegistration, fuelCapacity,
-				 batteryDuration, hasSoat, chargerType, gasType, soatPrice, soatYear, coverageCost, tmrPrice, tmrYear, tmrGasLevels,
-				 pcPrice, pcYear, doorNum, polarized, carType);
+				System.out.println(auto.addVehicle(basePrice, brand, model, cylinderCapacity, mileage, used, vehicleRegistration, fuelCapacity,
+				batteryDuration, hasSoat, chargerType, gasType, soatPrice, soatYear, coverageCost, tmrPrice, tmrYear, tmrGasLevels,
+				pcPrice, pcYear, doorNum, polarized, carType));
+				
 			break;
 
 			case 3:
@@ -372,15 +370,16 @@ public class Main{
 						polarized = true;
 					}else{
 						polarized = false;
-					}	
-
-				auto.addVehicle(basePrice, brand, model, cylinderCapacity, hasSoat, mileage, used, vehicleRegistration, fuelCapacity, gasType, soatPrice, soatYear, coverageCost, tmrPrice, tmrYear, tmrGasLevels, pcPrice, pcYear, doorNum, polarized, carType);
+					}
+						
+					System.out.println(auto.addVehicle(basePrice, brand, model, cylinderCapacity, hasSoat, mileage, used, vehicleRegistration, fuelCapacity, gasType, soatPrice, soatYear, coverageCost, tmrPrice, tmrYear, tmrGasLevels, pcPrice, pcYear, doorNum, polarized, carType));
+					
 
 			break;
 
 			case 4:
 
-				if(!isGas){
+				if(isGas){
 					System.out.println("Please type a valid option.\n");
 				}else{
 
@@ -437,8 +436,8 @@ public class Main{
 					}else{
 						polarized = false;
 					}	
-
-					auto.addVehicle(basePrice, brand, model, cylinderCapacity, mileage, used, vehicleRegistration, batteryDuration, chargerType, hasSoat, soatPrice, soatYear, coverageCost, tmrPrice, tmrYear, tmrGasLevels, pcPrice, pcYear, doorNum, polarized, carType);
+					
+					System.out.println(auto.addVehicle(basePrice, brand, model, cylinderCapacity, mileage, used, vehicleRegistration, batteryDuration, chargerType, hasSoat, soatPrice, soatYear, coverageCost, tmrPrice, tmrYear, tmrGasLevels, pcPrice, pcYear, doorNum, polarized, carType));
 
 				}
 
@@ -455,13 +454,19 @@ public class Main{
 
 	public void calculateSellingPrice(){
 
-		int id;
+		int id, percent;
 
-		System.out.println("Please type the id of the car to calculate the selling price:");
+		System.out.println("Please type the id of the vehicle to calculate the selling price:");
 		id = sc.nextInt();
 		sc.nextLine();
 
+		System.out.println("Type the percentage of the extra discount (0) For none:");
+		percent = sc.nextInt();
+		sc.nextLine();
+
+		System.out.println(auto.calculateSellingPrice(id, percent));
+		
+
 	}
 
-	
 }

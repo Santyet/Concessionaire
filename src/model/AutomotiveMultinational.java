@@ -5,14 +5,10 @@ import java.util.ArrayList;
 public class AutomotiveMultinational{
 
 	private ArrayList<Vehicle> vehicles;
-	private Motorcycle motorcycle;
-	private HybridCar hybridCar;
-	private GasCar gasCar;
-	private ElectricCar electricCar;
 
 	public AutomotiveMultinational(ArrayList<Vehicle> vehicles){
 
-		this.vehicles = new ArrayList<Vehicle>();
+		this.vehicles = vehicles;
 	}
 
 	//ADD MOTORCYCLE
@@ -39,13 +35,20 @@ public class AutomotiveMultinational{
 			
 		}
 
-		double sellPrice = motorcycle.calculateSellingPrice(soatYear, tmrYear, used);
-		double fuelUsage = motorcycle.calculateGasUsage();
-		
-		vehicles.add(new Motorcycle(basePrice, sellPrice, brand, fuelUsage, model, cylinderCapacity, mileage, used, vehicleRegistration,
+		Motorcycle moto = (new Motorcycle(basePrice, 0, brand, 0, model, cylinderCapacity, mileage, used, vehicleRegistration,
 		 soat, technicalMechanicalReview, propertyCard, fuelCapacity, motorcycleType, gasType));
+
+
+		double sellPrice = ((Motorcycle)(moto)).calculateSellingPrice(soatYear, tmrYear, used);
+		double fuelUsage = ((Motorcycle)(moto)).calculateGasUsage();
 		
-		return "Motorcycle was added.\n";
+		moto.setSellPrice(sellPrice);
+		moto.setFuelUsage(fuelUsage);
+
+		vehicles.add(moto);
+		
+		int a = vehicles.size() - 1;
+		return "\nMotorcycle was added with id " + a + "\n";
 	}
 
 	//ADD GAS CAR
@@ -79,12 +82,19 @@ public class AutomotiveMultinational{
 			
 		}
 
-		double sellPrice = gasCar.calculateSellingPrice(soatYear, tmrYear, used);
-		double fuelUsage = gasCar.calculateGasUsage();
-		vehicles.add(new GasCar(basePrice, sellPrice, brand, fuelUsage, model, cylinderCapacity, mileage, used, vehicleRegistration,
-		soat, technicalMechanicalReview, propertyCard, doorNum, polarized, carType, fuelCapacity, gasType));
+		GasCar gascar = (new GasCar(basePrice, 0, brand, 0, model, cylinderCapacity, mileage, used, vehicleRegistration, soat, technicalMechanicalReview, propertyCard, doorNum, polarized, carType, fuelCapacity, gasType));
+
+
+		double sellPrice = ((GasCar)(gascar)).calculateSellingPrice(soatYear, tmrYear, used);
+		double fuelUsage = ((GasCar)(gascar)).calculateGasUsage();
 		
-		return "Gasoline car was added.";
+		gascar.setSellPrice(sellPrice);
+		gascar.setFuelUsage(fuelUsage);
+
+		vehicles.add(gascar);
+		
+		int a = vehicles.size() - 1;
+		return "\nGasoline car was added with id " + a + "\n";
 	}
 
 	//ADD HYBRID CAR
@@ -111,14 +121,23 @@ public class AutomotiveMultinational{
 			
 		}
 
-		double sellPrice = hybridCar.calculateSellingPrice(soatYear, tmrYear, used);
-		double fuelUsage = hybridCar.calculateBatteryUsage(chargerType);
-		double batteryUsage = hybridCar.calculateGasUsage();
+		HybridCar hyCar = (new HybridCar(basePrice, 0, brand, model, 0, 0,
+		 cylinderCapacity, mileage, used, vehicleRegistration, soat, technicalMechanicalReview, propertyCard,
+		  doorNum, polarized, carType, fuelCapacity, batteryDuration, gasType, chargerType));
 
-		vehicles.add(new HybridCar(basePrice, sellPrice, brand, model, fuelUsage, batteryUsage, cylinderCapacity, mileage, used, vehicleRegistration, soat,
-		 technicalMechanicalReview, propertyCard, doorNum, polarized, carType, fuelCapacity, batteryDuration, gasType, chargerType));
-	
-		return "Hybrid car was added.";
+
+		double sellPrice = ((HybridCar)(hyCar)).calculateSellingPrice(soatYear, tmrYear, used);
+		double fuelUsage = ((HybridCar)(hyCar)).calculateGasUsage();
+		double batteryUsage = ((HybridCar)(hyCar)).calculateBatteryUsage(chargerType);
+		
+		hyCar.setSellPrice(sellPrice);
+		hyCar.setFuelUsage(fuelUsage);
+		hyCar.setBatteryUsage(batteryUsage);
+
+		vehicles.add(hyCar);
+
+		int a = vehicles.size() - 1;
+		return "\nHybrid car was added with id " + a + "\n";
 	}
 
 	//ADD ELECTRIC CAR
@@ -145,12 +164,22 @@ public class AutomotiveMultinational{
 			
 		}
 
-		double sellPrice= electricCar.calculateSellingPrice(soatYear, tmrYear, used);
-		double batteryUsage = electricCar.calculateBatteryUsage(chargerType);
-		vehicles.add(new ElectricCar(basePrice, sellPrice, brand, model, cylinderCapacity,
-		mileage, used, vehicleRegistration, soat, technicalMechanicalReview, propertyCard, doorNum, polarized, carType, batteryDuration, batteryUsage, chargerType));
+		ElectricCar eCar = (new ElectricCar(basePrice, 0, brand, model,
+		 cylinderCapacity, mileage, used, vehicleRegistration, soat, technicalMechanicalReview,
+		  propertyCard, doorNum, polarized, carType, batteryDuration, 0, chargerType));
+
+
+		double sellPrice = ((ElectricCar)(eCar)).calculateSellingPrice(soatYear, tmrYear, used);
 		
-		return "Electric car added.";
+		double batteryUsage = ((ElectricCar)(eCar)).calculateBatteryUsage(chargerType);
+		
+		eCar.setSellPrice(sellPrice);
+		eCar.setBatteryUsage(batteryUsage);
+
+		vehicles.add(eCar);
+
+		int a = vehicles.size()-1;
+		return "\nElectric car added with id " + a + "\n";
 	}
 
 	public int[][] genCode(){
@@ -167,10 +196,14 @@ public class AutomotiveMultinational{
 		return code;
 	}
 
-	public String calculateSellingPrice(int id){
+	public String calculateSellingPrice(int id, int percent){
 
-		vehicles.get(id);
-		return "";
+		double price = vehicles.get(id).getSellPrice();
+
+		price = price-(price*percent);
+
+
+		return "\nThe selling price of this vehicle is:" + price + ".\n";
 	}
 
 	public String searchFromCriteria(){

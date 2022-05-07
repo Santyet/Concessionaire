@@ -25,15 +25,15 @@ public class InitModel {
         vehicles = new ArrayList<Vehicle>();
 
 		vehicles.add(new HybridCar(500000, 600000, "Toyota",
-         2000, 450, 30000, true, "ABC123",
+         2000, 450, 10, 30000, 1000, true, "ABC123",
           soat, technicalMechanicalReview, propertyCard, 2,
-           true, CarType.SEDAN, 20.0, 4.0, 40.0, 4.0, GasType.DIESEL, ChargerType.NORMAL));
+           true, CarType.SEDAN, 20.0, 4.0, GasType.DIESEL, ChargerType.NORMAL));
 
 
         vehicles.add(new GasCar(750000, 1000000, "Mazda",
-         1990, 900, 0, false, "",
+         1990, 900, 0, 0, false, "",
           soat, technicalMechanicalReview, null, 2,
-           true, CarType.PICKUP_TRUCK, 40.0, 7.3,GasType.EXTRA));
+           true, CarType.PICKUP_TRUCK, 7.3,GasType.EXTRA));
            
         
         vehicles.add(new ElectricCar(1000000, 1430000, "Volvo",
@@ -42,7 +42,7 @@ public class InitModel {
            false, CarType.PICKUP_TRUCK, 100.1, 1, ChargerType.FAST));
 
         vehicles.add(new Motorcycle(250000, 400000, "Kawasaki",
-         2022, 200, 0, false, "",
+         2022, 200, 0, 0, false, "",
           soat, technicalMechanicalReview, null, 20.0, MotorcycleType.CROSS, GasType.REGULAR));
 		
 
