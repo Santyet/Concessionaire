@@ -50,6 +50,22 @@ public class ElectricCar extends Car implements ICalculateBatteryUsage{
         }
         return usage;
     }
+
+    public String toString() {
+        String out = "\nThis is an electric car\n";
+
+        out += super.toString();
+        if (chargerType == ChargerType.NORMAL) {
+            out += "\nCharger type: Normal";
+        } else {
+            out += "\nCharger type: Fast";
+        }
+
+        out+= "\nBattery duration: "+ batteryDuration
+        +"\nBattery usage (Kilowatts per km): "+ batteryUsage + "\n";
+
+        return out;
+    }
     
 
     /**

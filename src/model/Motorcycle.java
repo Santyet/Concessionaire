@@ -47,7 +47,33 @@ public class Motorcycle extends Vehicle implements ICalculateGasUsage{
         return (fuelCapacity)*(super.getCylinderCapacity()/75);
     }
 
-    
+    public String toString() {
+        String out = "\nThis is a motorcycle\n"; 
+        out+= super.toString();
+        out += "\nCapacity of the tank: " + fuelCapacity+ "\nFuel consumption: "+ fuelUsage;
+
+        switch(motorcycleType){
+
+            case STANDARD:
+                out += "\nMotorcycle type: Standard\n";
+            break;
+
+            case SPORT:
+                out += "\nMotorcycle type: Sport\n";
+            break;
+
+            case SCOOTER:
+                out += "\nMotorcycle type: Scooter\n";
+            break;
+
+            case CROSS:
+                out += "\nMotorcycle type: Cross\n";
+            break;
+
+        }
+      
+        return out;
+    }
     
 
     /**

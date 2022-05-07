@@ -1,5 +1,6 @@
 package ui;
 import java.util.Scanner; //for input reading
+
 import model.AutomotiveMultinational;
 import model.CarType;
 import model.ChargerType;
@@ -35,7 +36,7 @@ public class Main{
 		
 		switch(operation) {
 		case 0:
-			System.out.println("Bye!");
+				System.out.println("Bye!");
 			break;
 		case 1:
 		    	addVehicle();
@@ -45,7 +46,7 @@ public class Main{
 			break;
 	
 		case 3:
-			
+				searchFromCriteria();
 			break;
 
 		case 4:
@@ -128,6 +129,14 @@ public class Main{
 				System.out.println("Please type the year of the property card:");
 				pcYear = sc.nextInt();
 
+				System.out.println("Please type the price of the SOAT: ");
+				soatPrice = sc.nextDouble();
+				sc.nextLine();
+
+				System.out.println("Please type the year of the SOAT:");
+				soatYear = sc.nextInt();
+				sc.nextLine();
+
 			}else{
 
 				mileage = 0;
@@ -138,13 +147,7 @@ public class Main{
 		temp = sc.nextInt();
 		if(temp==1){
 
-			System.out.println("Please type the price of the SOAT: ");
-			soatPrice = sc.nextDouble();
-			sc.nextLine();
-
-			System.out.println("Please type the year of the SOAT:");
-			soatYear = sc.nextInt();
-			sc.nextLine();
+			
 
 			hasSoat = true;
 			
@@ -334,7 +337,7 @@ public class Main{
 
 				System.out.println(auto.addVehicle(basePrice, brand, model, cylinderCapacity, mileage, used, vehicleRegistration, fuelCapacity,
 				batteryDuration, hasSoat, chargerType, gasType, soatPrice, soatYear, coverageCost, tmrPrice, tmrYear, tmrGasLevels,
-				pcPrice, pcYear, doorNum, polarized, carType));
+				pcPrice, hasSoat, pcYear, doorNum, polarized, carType));
 				
 			break;
 
@@ -457,16 +460,67 @@ public class Main{
 		int id, percent;
 
 		System.out.println("Please type the id of the vehicle to calculate the selling price:");
-		id = sc.nextInt();
-		sc.nextLine();
+		id = Integer.parseInt(sc.nextLine());
 
 		System.out.println("Type the percentage of the extra discount (0) For none:");
-		percent = sc.nextInt();
-		sc.nextLine();
+		percent = Integer.parseInt(sc.nextLine());
 
 		System.out.println(auto.calculateSellingPrice(id, percent));
 		
-
 	}
 
+	public void searchFromCriteria(){
+
+		int option;
+
+		System.out.println("Please select the criteria to search:"
+		+ "\n(1) To vehicle type."
+		+ "\n(2) To fuel type."
+		+ "\n(3) To new/used.");
+		option = Integer.parseInt(sc.nextLine());
+
+		switch(option){
+
+			case 1:
+				System.out.println("Please select the type of the vehicles to search:"+
+				"\n(1) For motorcycles."
+				+"\n(2) For hybrid cars."
+				+"\n(3) For gasoline cars."
+				+"\n(4) For electric cars.");
+				option = Integer.parseInt(sc.nextLine());
+
+				System.out.println(auto.searchVehicleType(option));
+
+			break;
+
+			case 2:
+
+			System.out.println("Please select the fuel type of the vehicles to search:"
+			+"\n(1) For regular"
+			+"\n(2) For extra"
+			+"\n(3) For diesel");
+			option = Integer.parseInt(sc.nextLine());
+			
+			System.out.println(auto.searchFuelType(option));
+
+			break;
+
+			case 3:
+
+			System.out.println("Please select (1) for new or (2) for used cars:");
+			option = Integer.parseInt(sc.nextLine());
+
+			System.out.println(auto.searchNew(option));
+
+			break;
+
+			default:
+
+			System.out.println("Please select a valid option.");
+
+			break;
+		}
+
+
+	}
 }

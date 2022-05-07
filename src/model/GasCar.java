@@ -43,6 +43,31 @@ public class GasCar extends Car implements ICalculateGasUsage{
 
         return (fuelCapacity)*(super.getCylinderCapacity()/150);
     }
+
+    public String toString() {
+        String out = "\nThis is a gasoline car\n";
+        out+= super.toString();
+        out += "\nCapacity of the tank: " + fuelCapacity+ 
+        "\nFuel consumption: "+ fuelUsage;
+
+        switch(gasType){
+
+            case EXTRA:
+                out += "\nGasoline type: Extra\n";
+                break;
+
+            case DIESEL:
+                out += "\nGasoline type: Regular\n";
+                break;
+
+            case REGULAR:
+                out += "\nGasoline type: Diesel\n ";
+                break;
+        }
+
+        return out;
+
+    }
     
 
     /**

@@ -66,6 +66,38 @@ public class HybridCar extends Car implements ICalculateBatteryUsage,ICalculateG
         return usage;
     }
     
+    public String toString() {
+        String out = "\nThis is a hybrid car\n";
+        out += super.toString();
+
+        out += "\nCapacity of the tank: " + fuelCapacity+
+         "\nFuel consumption: "+ fuelUsage +
+          "\nBattery duration: " +batteryDuration +
+            "\nBattery consumption: "+ batteryUsage ;
+
+        if (chargerType == ChargerType.NORMAL) {
+            out += "\nCharger type: Normal";
+        } else {
+            out += "\nCharger type: Fast";
+        }
+
+        switch(gasType){
+
+            case EXTRA:
+                out += "\nGasoline type: Extra\n";
+                break;
+
+            case DIESEL:
+                out += "\nGasoline type: Diesel\n";
+                break;
+
+            case REGULAR:
+                out += "\nGasoline type: Regular\n ";
+                break;
+        }
+
+        return out;
+    }
 
     /**
      * @return double return the fuelCapacity

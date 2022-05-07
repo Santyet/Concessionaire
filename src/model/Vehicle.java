@@ -31,15 +31,24 @@ public abstract class Vehicle {
 
     public abstract double calculateSellingPrice(int soatYear, int tmrYear, boolean used);
 
-    public String toString(){
+    public String toString() {
 
         String out = "";
 
-        out = "Vehicle brand: " + brand + "\nVehicle model: " + model + "\nVehicle cylinder capacity: " +
-        cylinderCapacity + "Used: " + used + "\nVehicle mileage" + mileage + "\nVehicle registration: " + vehicleRegistration
-        + "\nVehicle base Price: " + basePrice;
-        return out;
+        out += "Base price: " + basePrice + "\nSale price: " + sellPrice + "\nBrand: " + brand + "\nModel: " + model + 
+        "\nCylinder capacity: " + cylinderCapacity + "\nMileage: " + mileage;
+        if (!vehicleRegistration.equals("")) {
+            out +="\nLicense plate: " + vehicleRegistration;
+        }else{
+            out += "\nLicense plate: None";
+        }
+        if (used == false) {
+            out+= "\nType of the vehicle: New";
+        } else{
+            out += "\nType of the vehicle: Used";
+        }
 
+        return out;
     }
 
     /*public String decodeL(){

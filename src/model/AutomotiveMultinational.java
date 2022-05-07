@@ -17,9 +17,15 @@ public class AutomotiveMultinational{
 	 double mileage, boolean used, String vehicleRegistration, double fuelCapacity, MotorcycleType motorcycleType,
 	 double soatPrice, int soatYear, double coverageCost, double tmrPrice, int tmrYear, double tmrGasLevels, double pcPrice, int pcYear, GasType gasType){
 		 
-		//SOAT CREATION PART
 		int[][] code = genCode();
-		SOAT soat = new SOAT(soatPrice, soatYear, code, coverageCost);
+
+		SOAT soat;
+		//SOAT CREATION PART
+		if(hasSoat){
+			soat = new SOAT(soatPrice, soatYear, code, coverageCost);
+		}else{
+			soat = new SOAT(0, 0, null, 0);
+		}
 
 		//TECHNICAL MECHANICAL REVIEW PART
 		code = genCode();
@@ -101,11 +107,17 @@ public class AutomotiveMultinational{
 	public String addVehicle(double basePrice, String brand, int model, int cylinderCapacity,
 	 double mileage, boolean used, String vehicleRegistration, double fuelCapacity, double batteryDuration, Boolean hasSBoolean,
 	 ChargerType chargerType, GasType gasType, double soatPrice, int soatYear, double coverageCost, double tmrPrice,
-	 int tmrYear, double tmrGasLevels, double pcPrice, int pcYear, int doorNum, boolean polarized, CarType carType){
+	 int tmrYear, double tmrGasLevels, double pcPrice, boolean hasSoat, int pcYear, int doorNum, boolean polarized, CarType carType){
 
-		//SOAT CREATION PART
 		int[][] code = genCode();
-		SOAT soat = new SOAT(soatPrice, soatYear, code, coverageCost);
+
+		SOAT soat;
+		//SOAT CREATION PART
+		if(hasSoat){
+			soat = new SOAT(soatPrice, soatYear, code, coverageCost);
+		}else{
+			soat = new SOAT(0, 0, null, 0);
+		}
 
 		//TECHNICAL MECHANICAL REVIEW PART
 		code = genCode();
@@ -146,9 +158,15 @@ public class AutomotiveMultinational{
 	 double soatPrice, int soatYear, double coverageCost, double tmrPrice, int tmrYear, double tmrGasLevels, double pcPrice,
 	 int pcYear, int doorNum, boolean polarized, CarType carType){
 
-		//SOAT CREATION PART
 		int[][] code = genCode();
-		SOAT soat = new SOAT(soatPrice, soatYear, code, coverageCost);
+
+		SOAT soat;
+		//SOAT CREATION PART
+		if(hasSoat){
+			soat = new SOAT(soatPrice, soatYear, code, coverageCost);
+		}else{
+			soat = new SOAT(0, 0, null, 0);
+		}
 
 		//TECHNICAL MECHANICAL REVIEW PART
 		code = genCode();
@@ -206,31 +224,17 @@ public class AutomotiveMultinational{
 		return "\nThe selling price of this vehicle is:" + price + ".\n";
 	}
 
-	public String searchFromCriteria(){
-	
-		throw new UnsupportedOperationException();
-	}
+	public String searchFromCriteria(int option){
 
-	public String searchFromId(){
-	
-		throw new UnsupportedOperationException();
-	}
-
-	public String showParkingLot(){
-
-		throw new UnsupportedOperationException();
-	}
-
-	public String showParkingOccupation(){
-
-		throw new UnsupportedOperationException();
-	}
-
-	public void selectedVehicleAdd(int option){
+		String out = "";
 
 		switch(option){
-
 			case 1:
+				
+				for (int i = 0; i < vehicles.size(); i++) {
+					out += "\nInformation vehicle: " + (i+1) + "\n";
+					out+= vehicles.get(i).toString();
+				}
 
 			break;
 
@@ -241,19 +245,272 @@ public class AutomotiveMultinational{
 			case 3:
 
 			break;
-
-			case 4:
-
-			break;
-
-			default:
-
-			break;
 		}
-		
+	
+		return out;
 	}
 
+	public String searchVehicleType(int type){
 
+		String out = "\nVEHICLES INFO:\n\n";
+
+		for(int i = 0; i<vehicles.size(); i++){
+
+			switch(type){
+
+				case 1:
+
+				if(vehicles.get(i) instanceof Motorcycle){
+
+					out += "Vehicle with id: " + i + "\n";
+					out += ((Motorcycle)(vehicles.get(i))).toString();
+
+				}
+
+				break;
+
+				case 2:
+
+				if(vehicles.get(i) instanceof HybridCar){
+
+					out += "Vehicle with id: " + i + "\n";
+					out += ((HybridCar)(vehicles.get(i))).toString();
+
+				}
+
+				break;
+
+				case 3:
+
+				if(vehicles.get(i) instanceof GasCar){
+
+					out += "Vehicle with id: " + i + "\n";
+					out += ((GasCar)(vehicles.get(i))).toString();
+
+				}
+
+				break;
+
+				case 4:
+
+				if(vehicles.get(i) instanceof ElectricCar){
+
+					out += "Vehicle with id: " + i + "\n";
+					out += ((ElectricCar)(vehicles.get(i))).toString();
+
+				}
+
+				break;
+			}
+
+		}
+
+		return out;
+
+	}
+
+	public String searchFuelType(int type){
+
+		String out = "\nVEHICLES INFO:\n\n";
+
+		for(int i = 0; i<vehicles.size(); i++){
+
+			if(vehicles.get(i) instanceof Motorcycle | vehicles.get(i) instanceof GasCar | vehicles.get(i) instanceof HybridCar){
+				
+				switch(type){
+
+					case 1:
+
+					if(vehicles.get(i) instanceof Motorcycle){
+
+						if(((Motorcycle)(vehicles.get(i))).getGasType()==GasType.REGULAR){
+
+							out += "\nVehicle with id: " + i + "\n";
+							out += ((Motorcycle)(vehicles.get(i))).toString();
+						}
+					}
+
+					if(vehicles.get(i) instanceof GasCar){
+
+						if(((GasCar)(vehicles.get(i))).getGasType()==GasType.REGULAR){
+
+							out += "\nVehicle with id: " + i + "\n";
+							out += ((GasCar)(vehicles.get(i))).toString();
+						}
+					}
+
+					if(vehicles.get(i) instanceof HybridCar){
+
+						if(((HybridCar)(vehicles.get(i))).getGasType()==GasType.REGULAR){
+
+							out += "\nVehicle with id: " + i + "\n";
+							out += ((HybridCar)(vehicles.get(i))).toString();
+						}
+					}
+
+					break;
+
+					case 2:
+
+						if(vehicles.get(i) instanceof Motorcycle){
+
+						if(((Motorcycle)(vehicles.get(i))).getGasType()==GasType.EXTRA){
+
+							out += "\nVehicle with id: " + i + "\n";
+							out += ((Motorcycle)(vehicles.get(i))).toString();
+						}
+					}
+
+					if(vehicles.get(i) instanceof GasCar){
+
+						if(((GasCar)(vehicles.get(i))).getGasType()==GasType.EXTRA){
+
+							out += "\nVehicle with id: " + i + "\n";
+							out += ((GasCar)(vehicles.get(i))).toString();
+						}
+					}
+
+					if(vehicles.get(i) instanceof HybridCar){
+
+						if(((HybridCar)(vehicles.get(i))).getGasType()==GasType.EXTRA){
+
+							out += "\nVehicle with id: " + i + "\n";
+							out += ((HybridCar)(vehicles.get(i))).toString();
+						}
+					}
+
+					break;
+
+					case 3:
+
+					if(vehicles.get(i) instanceof Motorcycle){
+
+						if(((Motorcycle)(vehicles.get(i))).getGasType()==GasType.DIESEL){
+
+							out += "\nVehicle with id: " + i + "\n";
+							out += ((Motorcycle)(vehicles.get(i))).toString();
+						}
+					}
+
+					if(vehicles.get(i) instanceof GasCar){
+
+						if(((GasCar)(vehicles.get(i))).getGasType()==GasType.DIESEL){
+
+							out += "\nVehicle with id: " + i + "\n";
+							out += ((GasCar)(vehicles.get(i))).toString();
+						}
+					}
+
+					if(vehicles.get(i) instanceof HybridCar){
+
+						if(((HybridCar)(vehicles.get(i))).getGasType()==GasType.DIESEL){
+
+							out += "\nVehicle with id: " + i + "\n";
+							out += ((HybridCar)(vehicles.get(i))).toString();
+						}
+					}
+
+					break;
+
+				}
+			}
+
+		}
+
+		return out;
+
+	}
+
+	public String searchNew(int used){
+
+		String out = "\nVEHICLES INFO:\n\n";
+
+		for(int i = 0; i<vehicles.size(); i++){
+
+			if(used == 2){
+				if(vehicles.get(i).isUsed()==true){
+
+					if(vehicles.get(i) instanceof Motorcycle){
+
+							out += "Vehicle with id: " + i + "\n";
+							out += ((Motorcycle)(vehicles.get(i))).toString();
+						
+					}
+
+					if(vehicles.get(i) instanceof GasCar){
+
+							out += "Vehicle with id: " + i + "\n";
+							out += ((GasCar)(vehicles.get(i))).toString();
+						
+					}
+
+					if(vehicles.get(i) instanceof HybridCar){
+
+							out += "Vehicle with id: " + i + "\n";
+							out += ((HybridCar)(vehicles.get(i))).toString();
+						
+					}
+
+					if(vehicles.get(i) instanceof ElectricCar){
+
+						out += "\nVehicle with id: " + i + "\n";
+						out += ((ElectricCar)(vehicles.get(i))).toString();
+					
+					}
+				}
+			}else{
+
+				if(vehicles.get(i).isUsed()==false){
+
+					if(vehicles.get(i) instanceof Motorcycle){
+
+							out += "\nVehicle with id: " + i + "\n";
+							out += ((Motorcycle)(vehicles.get(i))).toString();
+						
+					}
+
+					if(vehicles.get(i) instanceof GasCar){
+
+							out += "\nVehicle with id: " + i + "\n";
+							out += ((GasCar)(vehicles.get(i))).toString();
+						
+					}
+
+					if(vehicles.get(i) instanceof HybridCar){
+
+							out += "\nVehicle with id: " + i + "\n";
+							out += ((HybridCar)(vehicles.get(i))).toString();
+						
+					}
+
+					if(vehicles.get(i) instanceof ElectricCar){
+
+						out += "\nVehicle with id: " + i + "\n";
+						out += ((ElectricCar)(vehicles.get(i))).toString();
+					
+					}
+				}
+
+			}
+
+		}
+
+		return out;
+	}
+
+	public String searchFromId(){
 	
+		return "";
+	}
+
+	public String showParkingLot(){
+
+		return "";
+	}
+
+	public String showParkingOccupation(){
+
+		return "";
+	}
 
 }

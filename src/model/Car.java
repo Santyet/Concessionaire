@@ -16,6 +16,23 @@ public abstract class Car extends Vehicle {
                 this.carType = carType;
     }
     
+    public String toString() {
+
+        String out = "";
+        out += super.toString();
+        out += "\nNumber of doors: " + doorNum;
+        if (polarized) {
+            out += "\nPolarized windows: True";
+        } else {
+            out += "\nPolarized windows: False";
+        }
+        if (carType == CarType.SEDAN) {
+            out += "\nCar type: Sedan"; 
+        } else if (carType == CarType.PICKUP_TRUCK) {
+            out += "\nCar type: Pickup";
+        }
+        return out;
+    }
 
     /**
      * @return int return the doorNum
