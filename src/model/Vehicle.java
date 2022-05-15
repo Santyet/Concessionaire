@@ -43,9 +43,9 @@ public abstract class Vehicle {
             out += "\nLicense plate: None";
         }
         if (used == false) {
-            out+= "\nType of the vehicle: New";
+            out+= "\nThe vehicle is New";
         } else{
-            out += "\nType of the vehicle: Used";
+            out += "\nThe vehicle is Used";
         }
 
         return out;

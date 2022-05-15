@@ -23,7 +23,7 @@ public class ElectricCar extends Car implements ICalculateBatteryUsage{
 
         double totalPrice = super.getBasePrice() * 1.20;
 
-        if(soatYear<actualYear | tmrYear<actualYear){
+        if(used & (soatYear<actualYear | tmrYear<actualYear)){
 
             totalPrice+=500000;
 
@@ -43,11 +43,12 @@ public class ElectricCar extends Car implements ICalculateBatteryUsage{
 
         if(chargerType == ChargerType.NORMAL){
 
-            usage = (batteryDuration+13)*(super.getCylinderCapacity()/100);
+            usage = (batteryDuration+13)*(super.getCylinderCapacity()/100.0);
         }else{
 
-            usage = (batteryDuration+18)*(super.getCylinderCapacity()/100);
+            usage = (batteryDuration+18)*(super.getCylinderCapacity()/100.0);
         }
+        
         return usage;
     }
 

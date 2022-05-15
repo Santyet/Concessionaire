@@ -30,10 +30,24 @@ public class Document{
 
     String out;
 
-    out = "Price of the property card is: " + price + "\nyear of the property card: " + year + "\nDecode of the image: ";
+    out = "Price of the property card is: " + price + "\nyear of the property card: " + year + "\nDecode: " + decodeO(code);
     
     return out;
    }
+
+   public String decodeO(int[][] code) {
+
+    String decode ="";
+      for(int i = code.length-1; i>=0; i--){
+        for(int j= code[0].length-1; j>=0;j--){
+           if((i+j)%2==0 && (i+j)!=0){
+            decode += " "+code[i][j];
+            }
+        }
+      }
+    return decode;
+ 
+  }
 
    /* String[][] matriz = rellenandoLaMatriz(4,4);
     

@@ -50,11 +50,11 @@ public class Main{
 			break;
 
 		case 4:
-		
+				searchFromid();
 			break;
 
 		case 5:
-		
+				System.out.println(auto.showParkingLot());
 			break;
 		
 		default:
@@ -67,7 +67,7 @@ public class Main{
 		int option=0;
 
 		System.out.println(
-				"Please select an option:\n" +
+				"\nPlease select an option:\n" +
 				"(1) To register a vehicle.\n" +
                 "(2) To calculate the selling price of a vehicle.\n" +
 				"(3) To generate an inform of the vehicles with the selected criteria.\n"+
@@ -75,17 +75,16 @@ public class Main{
 				"(5) To generate an actual parking map.\n" + 
 				"(6) To generate a parking occupation inform.\n" +  
 				"(0) To exit");
-		option= sc.nextInt();
-		sc.nextLine();
+		option= Integer.parseInt(sc.nextLine());
 		return option;
 	}
 
 	public void addVehicle(){
 
-		double basePrice, mileage, fuelCapacity=0, batteryDuration, soatPrice=0, tmrPrice=0, tmrGasLevels=0, pcPrice=0, coverageCost=0;
+		double basePrice, mileage, fuelCapacity=0, batteryDuration=0, soatPrice=0, tmrPrice=0, tmrGasLevels=0, pcPrice=0, coverageCost=0;
 		String brand, vehicleRegistration;
 		int cylinderCapacity, option, temp, model, soatYear = 0, tmrYear = 0, pcYear = 0, doorNum;
-		boolean used, isGas = false, polarized, hasSoat;
+		boolean used, isGas = false, polarized;
 		GasType gasType = null;
 		ChargerType chargerType = null;
 		CarType carType = null;
@@ -98,16 +97,16 @@ public class Main{
 		brand = sc.nextLine();
 
 		System.out.println("Please type the model of the vehicle:");
-		model = sc.nextInt();
-		sc.nextLine();
+		model = Integer.parseInt(sc.nextLine());
+		
 
 		System.out.println("Please type the cylinder capacity of the vehicle:");
-		cylinderCapacity = sc.nextInt();
-		sc.nextLine();
+		cylinderCapacity = Integer.parseInt(sc.nextLine());
+		
 
 		System.out.println("Is this vehicle new? (1) for yes (2) for no:");
-			temp = sc.nextInt();
-			sc.nextLine();
+			temp = Integer.parseInt(sc.nextLine());
+			
 			if(temp == 1){
 				used = false;
 			}else{
@@ -120,22 +119,37 @@ public class Main{
 				vehicleRegistration = sc.nextLine();
 				
 				System.out.println("Please type the actual mileage of the vehicle:");
-				mileage = sc.nextDouble();
-				sc.nextLine();
+				mileage = Double.parseDouble(sc.nextLine());
+				
 
 				System.out.println("Please type the price of the property card:");
-				pcPrice = sc.nextDouble();
+				pcPrice = Double.parseDouble(sc.nextLine());
 
 				System.out.println("Please type the year of the property card:");
-				pcYear = sc.nextInt();
+				pcYear = Integer.parseInt(sc.nextLine());
 
 				System.out.println("Please type the price of the SOAT: ");
-				soatPrice = sc.nextDouble();
-				sc.nextLine();
+				soatPrice = Double.parseDouble(sc.nextLine());
+				
 
 				System.out.println("Please type the year of the SOAT:");
-				soatYear = sc.nextInt();
-				sc.nextLine();
+				soatYear = Integer.parseInt(sc.nextLine());
+
+				System.out.println("Please type the coverage cost of the SOAT:");
+				coverageCost = Double.parseDouble(sc.nextLine());
+				
+
+				System.out.println("Please type the price of the technical mechanical review:");
+				tmrPrice = Double.parseDouble(sc.nextLine());
+				
+
+				System.out.println("Please type the year of the technical mechanical review:");
+				tmrYear = Integer.parseInt(sc.nextLine());
+				
+
+				System.out.println("Please type the gas levels of the vehicle:");
+				tmrGasLevels = Double.parseDouble(sc.nextLine());
+				
 
 			}else{
 
@@ -143,47 +157,24 @@ public class Main{
 				vehicleRegistration = "";
 			}
 		
-		System.out.println("The vehicle has SOAT? (1) For yes (2) for no:");
-		temp = sc.nextInt();
-		if(temp==1){
-
-			
-
-			hasSoat = true;
-			
-		}else{
-			hasSoat = false;
-		}
 
 		
-
-		System.out.println("Please type the price of the technical mechanical review:");
-		tmrPrice = sc.nextDouble();
-		sc.nextLine();
-
-		System.out.println("Please type the year of the technical mechanical review:");
-		tmrYear = sc.nextInt();
-		sc.nextLine();
-
-		System.out.println("Please type the gas levels of the vehicle:");
-		tmrGasLevels = sc.nextDouble();
-		sc.nextLine();
 			
-		System.out.println("This vehicle uses gasoline?\n(1) for yes\n(2) for no:");
-		temp = sc.nextInt();
-		sc.nextLine();
+		System.out.println("This vehicle uses gasoline?\n(1) For yes\n(2) For no:");
+		temp = Integer.parseInt(sc.nextLine());
+		
 		
 		if(temp == 1){
 			
 			System.out.println("Please type the fuel capacity of the vehicle:");
-			fuelCapacity = sc.nextDouble();
-			sc.nextLine();
+			fuelCapacity = Double.parseDouble(sc.nextLine());
+			
 
 			System.out.println("Please select the gasoline type of the vehicle:\n"
 			+ "(1) For regular.\n"
 			+ "(2) For extra.\n"
 			+ "(3) For diesel.");
-			temp = sc.nextInt();
+			temp = Integer.parseInt(sc.nextLine());
 			switch(temp){
 				case 1:
 						gasType = GasType.REGULAR;
@@ -207,13 +198,13 @@ public class Main{
 		}else{
 
 			System.out.println("Please type the battery duration of the vehicle:");
-			batteryDuration = sc.nextDouble();
-			sc.nextLine();
+			batteryDuration = Double.parseDouble(sc.nextLine());
+			
 
 			System.out.println("Please select the charger type of the vehicle:\n"
 			+ "(1) For normal.\n"
 			+ "(2) For fast.");
-			temp = sc.nextInt();
+			temp = Integer.parseInt(sc.nextLine());
 			switch(temp){
 				case 1:
 						chargerType = ChargerType.NORMAL;
@@ -234,7 +225,7 @@ public class Main{
 			+"(1) For motorcycle.\n"
 			+"(2) For hybrid car.\n"
 			+"(3) For gasoline car.");
-			option = sc.nextInt();
+			option = Integer.parseInt(sc.nextLine());
 		}else{
 			option = 4;
 		}
@@ -251,7 +242,7 @@ public class Main{
 				+"(2) For sport.\n"
 				+"(3) For scooter.\n"
 				+"(4) For cross.");
-				option = sc.nextInt();
+				option = Integer.parseInt(sc.nextLine());
 				switch(option){
 					case 1:
 							motorcycleType = MotorcycleType.STANDARD;
@@ -274,7 +265,7 @@ public class Main{
 					break;
 				}
 				
-				System.out.println(auto.addVehicle(basePrice, brand, model, cylinderCapacity, hasSoat, mileage, used, vehicleRegistration, fuelCapacity, motorcycleType,
+				System.out.println(auto.addVehicle(basePrice, brand, model, cylinderCapacity, mileage, used, vehicleRegistration, fuelCapacity, motorcycleType,
 				soatPrice, soatYear, coverageCost, tmrPrice, tmrYear, tmrGasLevels, pcPrice, pcYear, gasType));
 				
 			break;
@@ -285,7 +276,7 @@ public class Main{
 				System.out.println("Please type the type of the car:\n"
 				+"(1) For sedan.\n"
 				+"(2) For pickup.");
-				temp = sc.nextInt();
+				temp = Integer.parseInt(sc.nextLine());
 				
 				switch(temp){
 					case 1:
@@ -301,34 +292,12 @@ public class Main{
 					break;
 				}
 
-				System.out.println("Please type the battery duration of the vehicle:");
-				batteryDuration = sc.nextDouble();
-				sc.nextLine();
-
-				System.out.println("Please select the charger type of the vehicle:\n"
-				+ "(1) For normal.\n"
-				+ "(2) For fast.");
-				temp = sc.nextInt();
-				switch(temp){
-					case 1:
-							chargerType = ChargerType.NORMAL;
-					break;
-
-					case 2:
-							chargerType = ChargerType.FAST;
-					break;
-
-					default:
-							System.out.println("Please select a valid option.\n");
-					break;
-				}
-
 				System.out.println("Please type the number of doors of the car:");
-				doorNum = sc.nextInt();
-				sc.nextLine();
+				doorNum = Integer.parseInt(sc.nextLine());
+				
 
 				System.out.println("The windows are polarized? (1) for yes (2) for no:");
-				option = sc.nextInt();
+				option = Integer.parseInt(sc.nextLine());
 				if(option==1){
 					polarized = true;
 				}else{
@@ -336,8 +305,8 @@ public class Main{
 				}				
 
 				System.out.println(auto.addVehicle(basePrice, brand, model, cylinderCapacity, mileage, used, vehicleRegistration, fuelCapacity,
-				batteryDuration, hasSoat, chargerType, gasType, soatPrice, soatYear, coverageCost, tmrPrice, tmrYear, tmrGasLevels,
-				pcPrice, hasSoat, pcYear, doorNum, polarized, carType));
+				batteryDuration, chargerType, gasType, soatPrice, soatYear, coverageCost, tmrPrice, tmrYear, tmrGasLevels,
+				pcPrice, pcYear, doorNum, polarized, carType));
 				
 			break;
 
@@ -347,7 +316,7 @@ public class Main{
 				System.out.println("Please type the type of the car:\n"
 				+"(1) For sedan.\n"
 				+"(2) For pickup.");
-				temp = sc.nextInt();
+				temp = Integer.parseInt(sc.nextLine());
 			
 				switch(temp){
 					case 1:
@@ -364,18 +333,18 @@ public class Main{
 				}
 
 				System.out.println("Please type the number of doors of the car:");
-				doorNum = sc.nextInt();
-				sc.nextLine();
+				doorNum = Integer.parseInt(sc.nextLine());
+				
 
 					System.out.println("The windows are polarized? (1) for yes (2) for no:");
-					option = sc.nextInt();
+					option = Integer.parseInt(sc.nextLine());
 					if(option==1){
 						polarized = true;
 					}else{
 						polarized = false;
 					}
 						
-					System.out.println(auto.addVehicle(basePrice, brand, model, cylinderCapacity, hasSoat, mileage, used, vehicleRegistration, fuelCapacity, gasType, soatPrice, soatYear, coverageCost, tmrPrice, tmrYear, tmrGasLevels, pcPrice, pcYear, doorNum, polarized, carType));
+					System.out.println(auto.addVehicle(basePrice, brand, model, cylinderCapacity, mileage, used, vehicleRegistration, fuelCapacity, gasType, soatPrice, soatYear, coverageCost, tmrPrice, tmrYear, tmrGasLevels, pcPrice, pcYear, doorNum, polarized, carType));
 					
 
 			break;
@@ -390,7 +359,7 @@ public class Main{
 					System.out.println("Please type the type of the car:\n"
 					+"(1) For sedan.\n"
 					+"(2) For pickup.");
-					temp = sc.nextInt();
+					temp = Integer.parseInt(sc.nextLine());
 			
 					switch(temp){
 						case 1:
@@ -402,45 +371,25 @@ public class Main{
 						break;
 					
 						default:
-							System.out.println("Please type a valid opion.\n");
-						break;
-					}
-
-					System.out.println("Please type the battery duration of the vehicle:");
-					batteryDuration = sc.nextDouble();
-					sc.nextLine();
-
-					System.out.println("Please select the charger type of the vehicle:\n"
-					+ "(1) For normal.\n"
-					+ "(2) For fast.");
-					temp = sc.nextInt();
-					switch(temp){
-						case 1:
-								chargerType = ChargerType.NORMAL;
-						break;
-
-						case 2:
-								chargerType = ChargerType.FAST;
-						break;
-
-						default:
-								System.out.println("Please select a valid option.\n");
+							System.out.println("Please type a valid option.\n");
 						break;
 					}
 
 					System.out.println("Please type the number of doors of the car:");
-					doorNum = sc.nextInt();
-					sc.nextLine();
+					doorNum = Integer.parseInt(sc.nextLine());
+					
 
 					System.out.println("The windows are polarized? (1) for yes (2) for no:");
-					option = sc.nextInt();
+					option = Integer.parseInt(sc.nextLine());
 					if(option==1){
 						polarized = true;
 					}else{
 						polarized = false;
 					}	
 					
-					System.out.println(auto.addVehicle(basePrice, brand, model, cylinderCapacity, mileage, used, vehicleRegistration, batteryDuration, chargerType, hasSoat, soatPrice, soatYear, coverageCost, tmrPrice, tmrYear, tmrGasLevels, pcPrice, pcYear, doorNum, polarized, carType));
+					System.out.println(auto.addVehicle(basePrice, brand, model, cylinderCapacity, mileage,
+					 used, vehicleRegistration, batteryDuration, chargerType, soatPrice, soatYear,
+					  coverageCost, tmrPrice, tmrYear, tmrGasLevels, pcPrice, pcYear, doorNum, polarized, carType));
 
 				}
 
@@ -521,6 +470,44 @@ public class Main{
 			break;
 		}
 
+	}
 
+	public void searchFromid(){
+
+		String id;
+			
+		System.out.println("Please type de id of the car:");
+		id = sc.nextLine();
+
+		System.out.println(auto.searchFromId(id));
+	}
+
+	public void occupationInform(){
+
+		int option;
+
+		System.out.println("Please select the criteria to generate an inform" +
+		"(1) T");
+
+		option = Integer.parseInt(sc.nextLine());
+
+		switch(option){
+
+			case 1:
+
+			break;
+
+			case 2:
+
+			break;
+
+			case 3:
+
+			break;
+
+			default:
+
+			break;
+		}
 	}
 }

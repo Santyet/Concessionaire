@@ -13,10 +13,26 @@ public class SOAT extends Document{
 
         String out;
     
-        out = "Price of the SOAT is: " + super.getPrice() + "\nyear of the SOAT: " + super.getYear() + "\nDecode of the image: ";
+        out = "Price of the SOAT is: " + super.getPrice() + "\nyear of the SOAT: " + super.getYear() 
+        + "\nSOAT coverage cost: " + coverageCost  + "\nDecode: " + decodeL(super.getCode()) + "\n";
         
         return out;
     }
+
+    public String decodeL(int[][] code) {
+     
+        String decode = "";
+  
+          for(int i = 0; i<code.length; i++){
+            decode += " "+code[i][0];
+          }
+    
+          for (int i = 1; i < code[0].length; i++){
+            decode += " "+code[code.length-1][i];
+          } 
+      
+      return decode;
+      }
 
     /**
      * @return double return the coverageCost

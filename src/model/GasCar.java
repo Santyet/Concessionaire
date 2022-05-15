@@ -24,7 +24,7 @@ public class GasCar extends Car implements ICalculateGasUsage{
 
         double totalPrice = super.getBasePrice();
 
-        if(soatYear<actualYear | tmrYear<actualYear){
+        if(used & (soatYear<actualYear | tmrYear<actualYear)){
 
             totalPrice+=500000;
 
@@ -41,7 +41,7 @@ public class GasCar extends Car implements ICalculateGasUsage{
     @Override
     public double calculateGasUsage() {
 
-        return (fuelCapacity)*(super.getCylinderCapacity()/150);
+        return (fuelCapacity)*(super.getCylinderCapacity()/150.0);
     }
 
     public String toString() {

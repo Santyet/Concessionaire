@@ -32,7 +32,7 @@ public class HybridCar extends Car implements ICalculateBatteryUsage,ICalculateG
 
         double totalPrice = super.getBasePrice() * 1.15;
 
-        if(soatYear<actualYear | tmrYear<actualYear){
+        if(used & (soatYear<actualYear | tmrYear<actualYear)){
 
             totalPrice+=500000;
 
@@ -49,7 +49,7 @@ public class HybridCar extends Car implements ICalculateBatteryUsage,ICalculateG
     @Override
     public double calculateGasUsage() {
    
-        return (fuelCapacity)*(super.getCylinderCapacity()/180);
+        return (fuelCapacity)*(super.getCylinderCapacity()/180.0);
     }
 
 

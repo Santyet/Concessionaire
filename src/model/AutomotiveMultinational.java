@@ -1,19 +1,31 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class AutomotiveMultinational{
 
 	private ArrayList<Vehicle> vehicles;
+	private String[][] parking;
 
 	public AutomotiveMultinational(ArrayList<Vehicle> vehicles){
 
 		this.vehicles = vehicles;
-	}
+		parking = new String[10][5];
 
+		for (int i=0; i< parking.length; i++ ) { 
+			for (int j = 0; j < parking[0].length; j++) { 
+				
+				parking[i][j] = "\t\t/";
+			}
+			
+		}
+		
+	}
+	
 	//ADD MOTORCYCLE
 	
-	public String addVehicle(double basePrice, String brand, int model, int cylinderCapacity, boolean hasSoat,
+	public String addVehicle(double basePrice, String brand, int model, int cylinderCapacity,
 	 double mileage, boolean used, String vehicleRegistration, double fuelCapacity, MotorcycleType motorcycleType,
 	 double soatPrice, int soatYear, double coverageCost, double tmrPrice, int tmrYear, double tmrGasLevels, double pcPrice, int pcYear, GasType gasType){
 		 
@@ -21,15 +33,20 @@ public class AutomotiveMultinational{
 
 		SOAT soat;
 		//SOAT CREATION PART
-		if(hasSoat){
+		if(used){
 			soat = new SOAT(soatPrice, soatYear, code, coverageCost);
 		}else{
-			soat = new SOAT(0, 0, null, 0);
+			soat = new SOAT(0, Calendar.getInstance().get(Calendar.YEAR), null, 0);
 		}
 
 		//TECHNICAL MECHANICAL REVIEW PART
+		TechnicalMechanicalReview technicalMechanicalReview;
 		code = genCode();
-		TechnicalMechanicalReview technicalMechanicalReview = new TechnicalMechanicalReview(tmrPrice, tmrYear, code, tmrGasLevels);
+		if(used){
+			technicalMechanicalReview = new TechnicalMechanicalReview(tmrPrice, tmrYear, code, tmrGasLevels);
+		}else{
+			technicalMechanicalReview = new TechnicalMechanicalReview(0, Calendar.getInstance().get(Calendar.YEAR), null, 0);
+		}
 
 		//PROPERTY CARD PART (IF VEHICLE IS USED)
 		Document propertyCard;
@@ -37,7 +54,7 @@ public class AutomotiveMultinational{
 			code = genCode();
 			propertyCard = new Document(pcPrice, pcYear, code);
 		}else{
-			propertyCard = new Document(0, 0, null);
+			propertyCard = new Document(0, Calendar.getInstance().get(Calendar.YEAR), null);
 			
 		}
 
@@ -48,17 +65,20 @@ public class AutomotiveMultinational{
 		double sellPrice = ((Motorcycle)(moto)).calculateSellingPrice(soatYear, tmrYear, used);
 		double fuelUsage = ((Motorcycle)(moto)).calculateGasUsage();
 		
+		System.out.println(fuelUsage);
+
 		moto.setSellPrice(sellPrice);
 		moto.setFuelUsage(fuelUsage);
 
 		vehicles.add(moto);
+		System.out.println(addIfOld(moto));
 		
 		int a = vehicles.size() - 1;
 		return "\nMotorcycle was added with id " + a + "\n";
 	}
 
 	//ADD GAS CAR
-	public String addVehicle(double basePrice, String brand, int model, int cylinderCapacity, boolean hasSoat,
+	public String addVehicle(double basePrice, String brand, int model, int cylinderCapacity,
 	 double mileage, boolean used, String vehicleRegistration, double fuelCapacity, GasType gasType, 
 	 double soatPrice, int soatYear, double coverageCost, double tmrPrice, int tmrYear, double tmrGasLevels, double pcPrice, int pcYear,
 	 int doorNum, boolean polarized, CarType carType){
@@ -67,16 +87,20 @@ public class AutomotiveMultinational{
 
 		SOAT soat;
 		//SOAT CREATION PART
-		if(hasSoat){
+		if(used){
 			soat = new SOAT(soatPrice, soatYear, code, coverageCost);
 		}else{
-			soat = new SOAT(0, 0, null, 0);
+			soat = new SOAT(0, Calendar.getInstance().get(Calendar.YEAR), null, 0);
 		}
-		
 
 		//TECHNICAL MECHANICAL REVIEW PART
-		code = genCode();
-		TechnicalMechanicalReview technicalMechanicalReview = new TechnicalMechanicalReview(tmrPrice, tmrYear, code, tmrGasLevels);
+		TechnicalMechanicalReview technicalMechanicalReview;
+		if(used){
+			code = genCode();
+			technicalMechanicalReview = new TechnicalMechanicalReview(tmrPrice, tmrYear, code, tmrGasLevels);
+		}else{
+			technicalMechanicalReview = new TechnicalMechanicalReview(0, Calendar.getInstance().get(Calendar.YEAR), null, 0);
+		}
 
 		//PROPERTY CARD PART (IF VEHICLE IS USED)
 		Document propertyCard;
@@ -84,7 +108,7 @@ public class AutomotiveMultinational{
 			code = genCode();
 			propertyCard = new Document(pcPrice, pcYear, code);
 		}else{
-			propertyCard = new Document(0, 0, null);
+			propertyCard = new Document(0, Calendar.getInstance().get(Calendar.YEAR), null);
 			
 		}
 
@@ -98,6 +122,7 @@ public class AutomotiveMultinational{
 		gascar.setFuelUsage(fuelUsage);
 
 		vehicles.add(gascar);
+		System.out.println(addIfOld(gascar));
 		
 		int a = vehicles.size() - 1;
 		return "\nGasoline car was added with id " + a + "\n";
@@ -105,23 +130,28 @@ public class AutomotiveMultinational{
 
 	//ADD HYBRID CAR
 	public String addVehicle(double basePrice, String brand, int model, int cylinderCapacity,
-	 double mileage, boolean used, String vehicleRegistration, double fuelCapacity, double batteryDuration, Boolean hasSBoolean,
+	 double mileage, boolean used, String vehicleRegistration, double fuelCapacity, double batteryDuration,
 	 ChargerType chargerType, GasType gasType, double soatPrice, int soatYear, double coverageCost, double tmrPrice,
-	 int tmrYear, double tmrGasLevels, double pcPrice, boolean hasSoat, int pcYear, int doorNum, boolean polarized, CarType carType){
+	 int tmrYear, double tmrGasLevels, double pcPrice, int pcYear, int doorNum, boolean polarized, CarType carType){
 
 		int[][] code = genCode();
 
 		SOAT soat;
 		//SOAT CREATION PART
-		if(hasSoat){
+		if(used){
 			soat = new SOAT(soatPrice, soatYear, code, coverageCost);
 		}else{
-			soat = new SOAT(0, 0, null, 0);
+			soat = new SOAT(0, Calendar.getInstance().get(Calendar.YEAR), null, 0);
 		}
 
 		//TECHNICAL MECHANICAL REVIEW PART
-		code = genCode();
-		TechnicalMechanicalReview technicalMechanicalReview = new TechnicalMechanicalReview(tmrPrice, tmrYear, code, tmrGasLevels);
+		TechnicalMechanicalReview technicalMechanicalReview;
+		if(used){
+			code = genCode();
+			technicalMechanicalReview = new TechnicalMechanicalReview(tmrPrice, tmrYear, code, tmrGasLevels);
+		}else{
+			technicalMechanicalReview = new TechnicalMechanicalReview(0, Calendar.getInstance().get(Calendar.YEAR), null, 0);
+		}
 
 		//PROPERTY CARD PART (IF VEHICLE IS USED)
 		Document propertyCard;
@@ -129,7 +159,7 @@ public class AutomotiveMultinational{
 			code = genCode();
 			propertyCard = new Document(pcPrice, pcYear, code);
 		}else{
-			propertyCard = new Document(0, 0, null);
+			propertyCard = new Document(0, Calendar.getInstance().get(Calendar.YEAR), null);
 			
 		}
 
@@ -147,6 +177,7 @@ public class AutomotiveMultinational{
 		hyCar.setBatteryUsage(batteryUsage);
 
 		vehicles.add(hyCar);
+		System.out.println(addIfOld(hyCar));
 
 		int a = vehicles.size() - 1;
 		return "\nHybrid car was added with id " + a + "\n";
@@ -154,7 +185,7 @@ public class AutomotiveMultinational{
 
 	//ADD ELECTRIC CAR
 	public String addVehicle(double basePrice, String brand, int model, int cylinderCapacity, double mileage,
-	 boolean used, String vehicleRegistration, double batteryDuration, ChargerType chargerType, boolean hasSoat,
+	 boolean used, String vehicleRegistration, double batteryDuration, ChargerType chargerType,
 	 double soatPrice, int soatYear, double coverageCost, double tmrPrice, int tmrYear, double tmrGasLevels, double pcPrice,
 	 int pcYear, int doorNum, boolean polarized, CarType carType){
 
@@ -162,15 +193,20 @@ public class AutomotiveMultinational{
 
 		SOAT soat;
 		//SOAT CREATION PART
-		if(hasSoat){
+		if(used){
 			soat = new SOAT(soatPrice, soatYear, code, coverageCost);
 		}else{
-			soat = new SOAT(0, 0, null, 0);
+			soat = new SOAT(0, Calendar.getInstance().get(Calendar.YEAR), null, 0);
 		}
 
 		//TECHNICAL MECHANICAL REVIEW PART
-		code = genCode();
-		TechnicalMechanicalReview technicalMechanicalReview = new TechnicalMechanicalReview(tmrPrice, tmrYear, code, tmrGasLevels);
+		TechnicalMechanicalReview technicalMechanicalReview;
+		if(used){
+			code = genCode();
+			technicalMechanicalReview = new TechnicalMechanicalReview(tmrPrice, tmrYear, code, tmrGasLevels);
+		}else{
+			technicalMechanicalReview = new TechnicalMechanicalReview(0, Calendar.getInstance().get(Calendar.YEAR), null, 0);
+		}
 
 		//PROPERTY CARD PART (IF VEHICLE IS USED)
 		Document propertyCard;
@@ -178,7 +214,7 @@ public class AutomotiveMultinational{
 			code = genCode();
 			propertyCard = new Document(pcPrice, pcYear, code);
 		}else{
-			propertyCard = new Document(0, 0, null);
+			propertyCard = new Document(0, Calendar.getInstance().get(Calendar.YEAR), null);
 			
 		}
 
@@ -195,6 +231,7 @@ public class AutomotiveMultinational{
 		eCar.setBatteryUsage(batteryUsage);
 
 		vehicles.add(eCar);
+		System.out.println(addIfOld(eCar));
 
 		int a = vehicles.size()-1;
 		return "\nElectric car added with id " + a + "\n";
@@ -206,7 +243,7 @@ public class AutomotiveMultinational{
 
     	for (int i=0; i<5 ; i ++) {
         	for (int j=0; j<5 ; j++) {
-           		int random = (int)(Math.random()*(10));
+           		int random = (int)(Math.random()*(99));
             	code[i][j]=random;
          	}
 		}
@@ -224,32 +261,6 @@ public class AutomotiveMultinational{
 		return "\nThe selling price of this vehicle is:" + price + ".\n";
 	}
 
-	public String searchFromCriteria(int option){
-
-		String out = "";
-
-		switch(option){
-			case 1:
-				
-				for (int i = 0; i < vehicles.size(); i++) {
-					out += "\nInformation vehicle: " + (i+1) + "\n";
-					out+= vehicles.get(i).toString();
-				}
-
-			break;
-
-			case 2:
-
-			break;
-
-			case 3:
-
-			break;
-		}
-	
-		return out;
-	}
-
 	public String searchVehicleType(int type){
 
 		String out = "\nVEHICLES INFO:\n\n";
@@ -264,8 +275,7 @@ public class AutomotiveMultinational{
 
 					out += "Vehicle with id: " + i + "\n";
 					out += ((Motorcycle)(vehicles.get(i))).toString();
-
-				}
+					}
 
 				break;
 
@@ -297,6 +307,7 @@ public class AutomotiveMultinational{
 
 					out += "Vehicle with id: " + i + "\n";
 					out += ((ElectricCar)(vehicles.get(i))).toString();
+					
 
 				}
 
@@ -498,14 +509,258 @@ public class AutomotiveMultinational{
 		return out;
 	}
 
-	public String searchFromId(){
+	public String searchFromId(String id){
+
+		String out = "\nVehicle doesn't exists.\n";
+
+		if(vehicles.get(Integer.parseInt(id))!=null){
+			
+			out = vehicles.get(Integer.parseInt(id)).getTechnicalMechanicalReview().toStringa();
+
+			if(vehicles.get(Integer.parseInt(id)).getSoat().getCode()!=null){
+
+				out += "\n" + vehicles.get(Integer.parseInt(id)).getSoat().toString();
+
+			}else{
+				out += "\nThis vehicle doesn't have SOAT\n";
+			}
+
+			if(vehicles.get(Integer.parseInt(id)).getPropertyCard().getCode()!=null){
+			
+			out += "\n" + vehicles.get(Integer.parseInt(id)).getPropertyCard().toString();
+			}else{
+				out += "\nThis vehicle doesn't have property card";
+			}
+		}
 	
-		return "";
+		return out;
+	}
+
+	public String addIfOld(Vehicle vehicle){
+
+		String out = "";
+
+		boolean hasSpace = false, done = false;
+
+		for (int i=0; i< parking.length; i++ ) { 
+			for (int j = 0; j < parking[0].length; j++) { 
+				if(parking[i][j].equals("\t\t/") & !done){
+
+					done = true;
+					hasSpace = true;
+
+				}
+			}
+		}
+
+		if(hasSpace){
+
+			if(vehicle.getModel()==2014){
+
+				if(!add2014(vehicle)){
+					out = "\nThis parking column is full";
+				}else{
+					out = "\nVehicle added to the parking lot";
+				}
+			}
+	
+			if(vehicle.getModel()==2013){
+	
+				if(!add2013(vehicle)){
+					out = "\nThis parking column is full";
+				}else{
+					out = "\nVehicle added to the parking lot";
+				}
+			}
+	
+			if(vehicle.getModel()==2012){
+	
+				if(!add2012(vehicle)){
+					out = "\nThis parking column is full";
+				}else{
+					out = "\nVehicle added to the parking lot";
+				}
+			}
+	
+			if(vehicle.getModel()==2011){
+	
+				if(!add2011(vehicle)){
+					out = "\nThis parking column is full";
+				}else{
+					out = "\nVehicle added to the parking lot";
+				}
+			}
+
+			if(vehicle.getModel()<2011){
+
+				if(!addLessThan2011(vehicle)){
+					out = "\nThis parking column is full";
+				}else{
+					out = "\nVehicle added to the parking lot";
+				}
+			}
+	
+			
+
+		}else{
+			out = "\nParking lot is full";
+		}
+		
+		if(vehicle.getModel()>2014){
+			out = null;
+		}
+		
+		return out;
+	}
+
+	public boolean addLessThan2011(Vehicle vehicle){
+
+		boolean done = false, hasSpace = true;
+		String mark = determineVehicleType(vehicle);
+
+		for(int i = 0;i<parking.length;i++){
+
+			if(parking[i][4].equals("\t\t/") & !done){
+
+				parking[i][4] = "\t\t" + (vehicles.size()-1) + mark;
+				done = true;
+			}
+		}
+
+		if(!done){
+			hasSpace=false;
+		}
+
+		return hasSpace;
+	}
+
+	public boolean add2011(Vehicle vehicle){
+
+		boolean done = false, hasSpace = true;
+		String mark = determineVehicleType(vehicle);
+
+		for(int i = 0;i<parking.length;i++){
+			
+			if(parking[i][3].equals("\t\t/") & !done){
+
+				parking[i][3] = "\t\t" + (vehicles.size()-1) + mark;
+				done = true;
+			}
+		}
+
+		if(!done){
+			hasSpace=false;
+		}
+
+		return hasSpace;
+	}
+
+	public boolean add2012(Vehicle vehicle){
+
+		boolean done = false, hasSpace = true;
+		String mark = determineVehicleType(vehicle);
+
+		for(int i = 0;i<parking.length;i++){
+
+			if(parking[i][2].equals("\t\t/") & !done){
+
+				parking[i][2] = "\t\t" + (vehicles.size()-1) + mark;
+				done = true;
+			}
+		}
+		
+		if(!done){
+			hasSpace=false;
+		}
+
+		return hasSpace;
+	}
+
+	public boolean add2013(Vehicle vehicle){
+
+		boolean done = false, hasSpace = true;
+		String mark = determineVehicleType(vehicle);
+
+		for(int i = 0;i<parking.length;i++){
+
+			if(parking[i][1].equals("\t\t/") & !done){
+
+				parking[i][1] = "\t\t" + (vehicles.size()-1) + mark;
+				done = true;
+			}
+
+		}	
+		
+		if(!done){
+			hasSpace=false;
+		}
+
+		return hasSpace;
+	}
+
+	public boolean add2014(Vehicle vehicle){
+
+		boolean done = false, hasSpace = true;
+		String mark = determineVehicleType(vehicle);
+
+		for(int i = 0;i<parking.length;i++){
+
+			if(parking[i][0].equals("\t\t/") & !done){
+
+				parking[i][0] = vehicles.get(vehicles.size()) + mark;
+				done = true;
+			}
+
+		}
+
+		if(!done){
+			hasSpace=false;
+		}
+
+		return hasSpace;
 	}
 
 	public String showParkingLot(){
 
-		return "";
+		String out = "\n\t\t2014\t\t2013\t\t2012\t\t2011\t\t<2011\n";
+
+		for (int i=0; i< parking.length; i++ ) {
+			for (int j = 0; j < parking[0].length; j++) {
+				out += parking[i][j] + " ";
+			}
+			out += "\n";
+		}
+
+		out += "\n\nM = Motorcycle\t\tG = Gasoline Car\tE = Electric Car\tH = Hybrid Car\t\t/ = Empty Space";
+
+		return out;
+	}
+
+	public String determineVehicleType(Vehicle vehicle){
+
+		String out = "";
+
+		if(vehicle instanceof Motorcycle){
+
+			out = "M";
+		}
+
+		if(vehicle instanceof GasCar){
+
+			out = "G";
+		}
+
+		if(vehicle instanceof ElectricCar){
+
+			out = "E";
+		}
+
+		if(vehicle instanceof HybridCar){
+
+			out = "H";
+		}
+
+		return out;
 	}
 
 	public String showParkingOccupation(){

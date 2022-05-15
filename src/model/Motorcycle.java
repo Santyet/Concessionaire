@@ -28,7 +28,7 @@ public class Motorcycle extends Vehicle implements ICalculateGasUsage{
 
         double totalPrice = super.getBasePrice() * 1.04;
 
-        if(soatYear<actualYear | tmrYear<actualYear){
+        if(used & (soatYear<actualYear | tmrYear<actualYear)){
 
             totalPrice+=500000;
 
@@ -44,33 +44,14 @@ public class Motorcycle extends Vehicle implements ICalculateGasUsage{
     @Override
     public double calculateGasUsage() {
 
-        return (fuelCapacity)*(super.getCylinderCapacity()/75);
+        return (fuelCapacity)*(super.getCylinderCapacity()/75.0);
     }
 
     public String toString() {
         String out = "\nThis is a motorcycle\n"; 
         out+= super.toString();
-        out += "\nCapacity of the tank: " + fuelCapacity+ "\nFuel consumption: "+ fuelUsage;
-
-        switch(motorcycleType){
-
-            case STANDARD:
-                out += "\nMotorcycle type: Standard\n";
-            break;
-
-            case SPORT:
-                out += "\nMotorcycle type: Sport\n";
-            break;
-
-            case SCOOTER:
-                out += "\nMotorcycle type: Scooter\n";
-            break;
-
-            case CROSS:
-                out += "\nMotorcycle type: Cross\n";
-            break;
-
-        }
+        out += "\nCapacity of the tank: " + fuelCapacity+ "\nFuel consumption: "+ fuelUsage + 
+        "\nMotorcycle type: " + motorcycleType + "\n\n";
       
         return out;
     }
