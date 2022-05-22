@@ -62,7 +62,7 @@ public class Main{
 			break;
 		
 		default:
-				System.out.println("Error, opción no válida");
+				System.out.println("\nType a valid option\n");
 			break;
 		}
 	}
