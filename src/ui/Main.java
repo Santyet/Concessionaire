@@ -56,10 +56,14 @@ public class Main{
 		case 5:
 				System.out.println(auto.showParkingLot());
 			break;
+
+		case 6:
+				occupationInform();
+			break;
 		
 		default:
-			System.out.println("Error, opción no válida");
-		
+				System.out.println("Error, opción no válida");
+			break;
 		}
 	}
 
@@ -485,9 +489,12 @@ public class Main{
 	public void occupationInform(){
 
 		int option;
+		int year1, year2;
 
 		System.out.println("Please select the criteria to generate an inform" +
-		"(1) T");
+		"\n(1) To get all car info from a range of years" +
+		"\n(2) To get the info of the newest and the oldest car" +
+		"\n(3) To get the occupation percentage of the parking lot");
 
 		option = Integer.parseInt(sc.nextLine());
 
@@ -495,18 +502,27 @@ public class Main{
 
 			case 1:
 
+				System.out.println("Please type the range of years starting from the oldest" +
+				"\nType the starting year:");
+				year1 = Integer.parseInt(sc.nextLine());
+
+				System.out.println("Type the finishing year:");
+				year2 = Integer.parseInt(sc.nextLine());
+
+				System.out.println(auto.getInfoFromYears(year1, year2));
+
 			break;
 
 			case 2:
-
+				System.out.println(auto.getOlderAndNewerVehicle() + "\n");
 			break;
 
 			case 3:
-
+				System.out.println("\nThe actual occpation percentage of the parking lot is: " + auto.getOccupationPercentage() + "\n");
 			break;
 
 			default:
-
+				System.out.println("Please select a valid option\n");
 			break;
 		}
 	}

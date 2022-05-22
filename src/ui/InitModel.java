@@ -18,7 +18,7 @@ public class InitModel {
             }
         }
 
-        SOAT soat = new SOAT(1, 1234, code, 123);
+        SOAT soat = new SOAT(1345436, 1234, code, 123);
         TechnicalMechanicalReview technicalMechanicalReview = new TechnicalMechanicalReview(2, 4321, code, 321);
         Document propertyCard = new Document(3, 2314, code);
 
@@ -42,7 +42,7 @@ public class InitModel {
            false, CarType.PICKUP_TRUCK, 100.1, 1, ChargerType.FAST));
 
         vehicles.add(new Motorcycle(250000, 400000, "Kawasaki",
-         2022, 200, 0, 0, false, "",
+         22, 2002, 100, 0, false, "",
           soat, technicalMechanicalReview, null, 20.0, MotorcycleType.CROSS, GasType.REGULAR));
 		
 
