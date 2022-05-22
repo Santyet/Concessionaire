@@ -50,7 +50,7 @@ public class Motorcycle extends Vehicle implements ICalculateGasUsage{
     public String toString() {
         String out = "\nThis is a motorcycle\n"; 
         out+= super.toString();
-        out += "\nCapacity of the tank: " + fuelCapacity+ "\nFuel consumption: "+ fuelUsage + 
+        out += "\nCapacity of the tank: " + fuelCapacity+ "\nFuel consumption: "+ fuelUsage + "\nFuel type: " + gasType +
         "\nMotorcycle type: " + motorcycleType + "\n\n";
       
         return out;

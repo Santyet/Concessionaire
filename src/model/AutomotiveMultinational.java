@@ -252,14 +252,9 @@ public class AutomotiveMultinational{
 	public String calculateSellingPrice(int id, int percent){
 
 		double price = vehicles.get(id).getSellPrice();
-		double a;
+		String a;
 
-		System.out.println(price);
-		System.out.println(percent/100.0);
-		System.out.println(price*(percent/100.0));
-
-		a = price-(price*(percent/100.0));
-
+		a = "" + (price-(price*(percent/100.0)));
 
 		return "\nThe selling price of this vehicle is: " + a + ".\n";
 	}
@@ -1090,15 +1085,60 @@ for(int i = 0;i<parking.length;i++){
 
 			for(int j = 0; j<parking[0].length;j++){
 
-				if(!parking[i][0].equals("\t\t/")){
+				if(!parking[i][j].equals("\t\t/")){
 
 					count++;
 				}
 			}
 		}
-        return (count*100)/50;
+        return (count*2);
     }
 
+	public boolean checkFor12(int opt){
+
+        boolean ok = false;
+        do{
+        if(opt!=2 & opt!=1){
+            System.out.println("Enter a valid option.");
+            break;
+            }else{
+                ok = true;
+            }
+        }while(opt!=2 & opt!=1);
+
+        return ok;
+    }
+
+	public boolean checkFor123(int opt){
+
+        boolean ok = false;
+        do{
+        if(opt!=2 & opt!=1 & opt!=3){
+            System.out.println("Enter a valid option.");
+            break;
+            }else{
+                ok = true;
+            }
+        }while(opt!=2 & opt!=1 & opt!=3);
+
+        return ok;
+    }
+
+	public boolean checkFor1234(int opt){
+
+        boolean ok = false;
+        do{
+        if(opt!=2 & opt!=1 & opt!=3 & opt!=4){
+            System.out.println("Enter a valid option.");
+            break;
+            }else{
+                ok = true;
+            }
+        }while(opt!=2 & opt!=1 & opt!=3 & opt!=4);
+
+        return ok;
+    }
+	
     /**
      * @return ArrayList<Vehicle> return the vehicles
      */
@@ -1121,7 +1161,7 @@ for(int i = 0;i<parking.length;i++){
     }
 
     /**
-     * @param parking the parking to set
+     * @param parking the parking to set.
      */
     public void setParking(String[][] parking) {
         this.parking = parking;
