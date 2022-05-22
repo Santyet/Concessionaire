@@ -897,184 +897,60 @@ public class AutomotiveMultinational{
 	String out = "";
 	String out2 = "";
 	int idNewer = -1, idOlder = -1;
+	boolean done = false;
 
-	for(int i = 0;i<parking.length;i++){
+	for(int i = 0; i<parking[0].length;i++){
+		for(int j = 0; j<parking.length; j++){
 
-		if(!parking[i][0].equals("\t\t/")){
+			if(!parking[j][i].equals("\t\t/")){
 
-			if(parking[i][0].length()>4){
+				if(parking[j][i].length()>4){
 				
-				char temp = parking[i][0].charAt(2);
-				String temp2 = String.valueOf(temp);
-				temp = parking[i][0].charAt(3);
-				temp2 +=temp;
-				idNewer = Integer.parseInt(temp2);
-				out = getVehicleInfo(idNewer);
-				
-			}else{
-				idNewer = parking[i][0].charAt(2);
-				idNewer -=48;
-				out = getVehicleInfo(idNewer);
-			}
-			}else{if(!parking[i][1].equals("\t\t/")){
-
-				if(parking[i][1].length()>4){
-					
-					char temp = parking[i][1].charAt(2);
+					char temp = parking[j][i].charAt(2);
 					String temp2 = String.valueOf(temp);
-					temp = parking[i][1].charAt(3);
+					temp = parking[j][i].charAt(3);
+					temp2 +=temp;
+					idOlder = Integer.parseInt(temp2);
+					out = getVehicleInfo(idOlder);
+					
+				}else{
+					idOlder = parking[j][i].charAt(2);
+					idOlder -=48;
+					out = getVehicleInfo(idOlder);
+				}
+
+			}
+		}
+	}
+
+	for(int i = 0; i<parking[0].length; i++){
+		for(int j = 0; j<parking.length; j++){
+
+			if(!parking[j][i].equals("\t\t/") && !done){
+
+				if(parking[j][i].length()>4){
+				
+					char temp = parking[j][i].charAt(2);
+					String temp2 = String.valueOf(temp);
+					temp = parking[j][i].charAt(3);
 					temp2 +=temp;
 					idNewer = Integer.parseInt(temp2);
-					out = getVehicleInfo(idNewer);
+					out2 = getVehicleInfo(idNewer);
+					done = true;
 					
 				}else{
-					idNewer = parking[i][1].charAt(2);
+					idNewer = parking[j][i].charAt(2);
 					idNewer -=48;
-					out = getVehicleInfo(idNewer);
+					out2 = getVehicleInfo(idNewer);
+					done = true;
 				}
-				}else{if(!parking[i][2].equals("\t\t/")){
 
-					if(parking[i][2].length()>4){
-						
-						char temp = parking[i][2].charAt(2);
-						String temp2 = String.valueOf(temp);
-						temp = parking[i][2].charAt(3);
-						temp2 +=temp;
-						idNewer = Integer.parseInt(temp2);
-						out = getVehicleInfo(idNewer);
-					
-					}else{
-						idNewer = parking[i][2].charAt(2);
-						idNewer -=48;
-						out = getVehicleInfo(idNewer);
-					}
-				}else{if(!parking[i][3].equals("\t\t/")){
-
-					if(parking[i][3].length()>4){
-						
-						char temp = parking[i][3].charAt(2);
-						String temp2 = String.valueOf(temp);
-						temp = parking[i][3].charAt(3);
-						temp2 +=temp;
-						idNewer = Integer.parseInt(temp2);
-						out = getVehicleInfo(idNewer);
-						
-					}else{
-						idNewer = parking[i][3].charAt(2);
-						idNewer -=48;
-						out = getVehicleInfo(idNewer);
-					}
-				}else{if(!parking[i][4].equals("\t\t/")){
-
-					if(parking[i][4].length()>4){
-						
-						char temp = parking[i][4].charAt(2);
-						String temp2 = String.valueOf(temp);
-						temp = parking[i][4].charAt(3);
-						temp2 +=temp;
-						idNewer = Integer.parseInt(temp2);
-						out = getVehicleInfo(idNewer);
-						
-					}else{
-						idNewer = parking[i][4].charAt(2);
-						idNewer -=48;
-						out = getVehicleInfo(idNewer);
-						}
-					}
-				}
 			}
 		}
 	}
-}
-for(int i = 0;i<parking.length;i++){
 
-	if(!parking[i][4].equals("\t\t/")){
-
-		if(parking[i][4].length()>4){
-			
-			char temp = parking[i][4].charAt(2);
-			String temp2 = String.valueOf(temp);
-			temp = parking[i][4].charAt(3);
-			temp2 +=temp;
-			idOlder = Integer.parseInt(temp2);
-			out2 = getVehicleInfo(idOlder);
-			
-		}else{
-			idOlder = parking[i][4].charAt(2);
-			idOlder -=48;
-			out2 = getVehicleInfo(idOlder);
-		}
-		}else{if(!parking[i][3].equals("\t\t/")){
-
-			if(parking[i][3].length()>4){
-				
-				char temp = parking[i][3].charAt(2);
-				String temp2 = String.valueOf(temp);
-				temp = parking[i][3].charAt(3);
-				temp2 +=temp;
-				idOlder = Integer.parseInt(temp2);
-				out2 = getVehicleInfo(idOlder);
-				
-			}else{
-				idOlder = parking[i][3].charAt(2);
-				idOlder -=48;
-				out2 = getVehicleInfo(idOlder);
-			}
-			}else{if(!parking[i][2].equals("\t\t/")){
-
-				if(parking[i][2].length()>4){
-					
-					char temp = parking[i][2].charAt(2);
-					String temp2 = String.valueOf(temp);
-					temp = parking[i][2].charAt(3);
-					temp2 +=temp;
-					idOlder = Integer.parseInt(temp2);
-					out2 = getVehicleInfo(idOlder);
-				
-				}else{
-					idOlder = parking[i][2].charAt(2);
-					idOlder -=48;
-					out2 = getVehicleInfo(idOlder);
-				}
-			}else{if(!parking[i][1].equals("\t\t/")){
-
-				if(parking[i][1].length()>4){
-					
-					char temp = parking[i][1].charAt(2);
-					String temp2 = String.valueOf(temp);
-					temp = parking[i][1].charAt(3);
-					temp2 +=temp;
-					idOlder = Integer.parseInt(temp2);
-					out2 = getVehicleInfo(idOlder);
-					
-				}else{
-					idOlder = parking[i][1].charAt(2);
-					idOlder -=48;
-					out2 = getVehicleInfo(idOlder);
-				}
-			}else{if(!parking[i][0].equals("\t\t/")){
-
-				if(parking[i][0].length()>4){
-					
-					char temp = parking[i][0].charAt(2);
-					String temp2 = String.valueOf(temp);
-					temp = parking[i][0].charAt(3);
-					temp2 +=temp;
-					idOlder = Integer.parseInt(temp2);
-					out2 = getVehicleInfo(idOlder);
-					
-				}else{
-					idOlder = parking[i][0].charAt(2);
-					idOlder -=48;
-					out2 = getVehicleInfo(idOlder);
-					}
-				}
-			}
-		}
-	}
-}
-}
-	return "\nNEWEST CAR:\n" + out +"\nOLDEST CAR:\n" + out2;
+	System.out.println(out2);
+	return "\nOLDEST VEHICLE\n" + out +"\nNEWEST VEHICLE:\n" + out2;
 	}
 
 	public double getOccupationPercentage(){
