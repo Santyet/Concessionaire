@@ -522,7 +522,7 @@ public class Main{
 		System.out.println("Type the percentage of the extra discount (0) For none:");
 		percent = Integer.parseInt(sc.nextLine());
 
-		System.out.println(auto.calculateSellingPrice(id, percent));
+		System.out.printf(auto.calculateSellingPrice(id, percent));
 		
 	}
 

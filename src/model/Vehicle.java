@@ -35,7 +35,10 @@ public abstract class Vehicle {
 
         String out = "";
 
-        out += "Base price: " + basePrice + "\nSale price: " + sellPrice + "\nBrand: " + brand + "\nModel: " + model + 
+        String tempBasePrice = String.format("%,.2f",basePrice);
+        String tempSellPrice = String.format("%,.2f",sellPrice);
+
+        out += "Base price: " + tempBasePrice + "\nSale price: " + tempSellPrice + "\nBrand: " + brand + "\nModel: " + model + 
         "\nCylinder capacity: " + cylinderCapacity + "\nMileage: " + mileage;
         if (!vehicleRegistration.equals("")) {
             out +="\nLicense plate: " + vehicleRegistration;

@@ -252,11 +252,10 @@ public class AutomotiveMultinational{
 	public String calculateSellingPrice(int id, int percent){
 
 		double price = vehicles.get(id).getSellPrice();
-		String a;
+		
+		String temp = String.format("%,.2f",price);
 
-		a = "" + (price-(price*(percent/100.0)));
-
-		return "\nThe selling price of this vehicle is: " + a + ".\n";
+		return "\nThe selling price of this vehicle is: " + temp + ".\n";
 	}
 
 	public String searchVehicleType(int type){
